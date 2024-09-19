@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+  @apply w-2 h-2 bg-cus-gray-950 dark:bg-cus-gray-100;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply px-2 mx-2 my-2 bg-cus-gray-950 dark:bg-cus-gray-100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-cus-gray-900 dark:bg-cus-gray-400;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-cus-gray-800 dark:bg-cus-gray-300;
+}
+
+.responsive-gap {
+  @apply gap-3 lg:gap-5
+}
+
+.responsive-gap-sections {
+  @apply gap-7 lg:gap-5
+}
+
+.responsive-p {
+  @apply p-3 lg:p-5
+}
+
+.responsive-pt0 {
+  @apply pt-0 px-3 lg:px-5 pb-3 lg:pb-5
+}
+
+.responsive-bg {
+  @apply bg-cus-gray-900 dark:bg-cus-gray-50
+}
+
+.responsive-text-color {
+  @apply text-cus-gray-300 dark:text-cus-gray-600
+}
+
+.responsive-subtext-color {
+  @apply text-cus-gray-500 dark:text-cus-gray-400
+}
+
+.icon-size {
+  @apply size-5
+}
+
+.icon-inactive {
+  @apply text-cus-gray-50 dark:text-cus-gray-800
+}
+
+.icon-active {
+  @apply z-10 text-cus-gray-50 dark:text-cus-gray-900 md:text-cus-gray-950
+}
+
+.wcard {
+  @apply h-full bg-cus-gray-900 dark:bg-cus-gray-50 justify-center p-5 rounded-3xl custom-hover shrink transition-all ease-in
+}
+
+.wcard-active {
+  @apply h-full grow bg-primary justify-center rounded-3xl text-cus-gray-950 custom-hover-shadowOnly
+  /* @apply h-full grow bg-primary justify-center rounded-3xl text-cus-gray-950 custom-hover-shadowOnly max-w-[500px] */
+}
+
+.wcard-hover {
+  @apply dark:hover:text-cus-gray-900 hover:text-cus-gray-50
+}
+
+.ccard {
+  @apply h-full bg-cus-gray-900 dark:bg-cus-gray-50 justify-center p-5 rounded-3xl custom-hover shrink transition-all ease-in
+}
+
+.ccard-active {
+  @apply h-full grow bg-primary justify-center rounded-3xl text-cus-gray-950 custom-hover-shadowOnly max-w-[500px]
+}
+
+.ccard-hover {
+  @apply dark:hover:text-cus-gray-900 hover:text-cus-gray-50
+}
+
+.roundBtn {
+  @apply bg-cus-gray-900 dark:bg-cus-gray-50 flex items-center p-3 rounded-full
+}
+
+.roundBtn-map {
+  @apply bg-cus-gray-600 dark:bg-cus-gray-200 text-white dark:text-cus-gray-950 flex items-center p-3 rounded-full bg-opacity-50 backdrop-blur shadow custom-hover-text-color hover:bg-opacity-80 hover:shadow-lg transition-all ease-in-out hover:scale-105
+}
+
+.custom-hover {
+  @apply hover:bg-cus-gray-800 dark:hover:bg-white cursor-pointer hover:shadow-md
+}
+
+.custom-hover-text-color {
+  @apply hover:text-white dark:hover:text-black
+}
+
+.custom-hover-undeline {
+  @apply hover:underline cursor-pointer
+}
+
+.custom-hover-shadowOnly {
+  @apply hover:shadow-md
+}
+
+.custom-hover-shadowOnly-sm {
+  @apply hover:shadow-sm
+}
+
+.custom-hover-noPointer {
+  @apply hover:bg-cus-gray-800 dark:hover:bg-white hover:shadow-md
+}
+
+.inputStyle {
+  @apply bg-transparent focus:ring-0 focus:outline-none text-cus-gray-50 dark:text-cus-gray-800
+}
+
+.focused2 {
+  @apply focus:ring-1 focus:ring-cus-gray-200 dark:focus:ring-cus-gray-400
+}
+
+.focused {
+  @apply focus-within:ring-1 focus-within:ring-cus-gray-200 dark:focus-within:ring-cus-gray-400
+}
+
+.focused-underline {
+  @apply focus:underline
+}
+
+.btn {
+  @apply rounded-full responsive-text-color py-2 text-center transition-colors ease-in-out
+}
+
+.btn-withIcon {
+  @apply btn text-sm pl-5 pr-4
+}
+
+.btn-showAll {
+  @apply rounded-full responsive-subtext-color py-2 text-center transition-colors ease-in-out
+}
+
+.btn-tab {
+  @apply btn text-sm w-full md:w-[150px]
+}
+
+.btn-activeTab {
+  @apply text-cus-gray-950 dark:text-cus-gray-950 cursor-default font-medium z-10
+  /* @apply bg-primary dark:bg-primary text-cus-gray-950 cursor-default */
+}
+
+.btn-inactiveTab {
+  @apply custom-hover-text-color custom-hover
+  /* @apply bg-primary dark:bg-primary text-cus-gray-950 cursor-default */
+}
+
+.day-inactive {
+  @apply rounded-full custom-hover-text-color responsive-subtext-color transition-all ease-in-out custom-hover-undeline focused-underline
+}
+
+.day-active {
+  @apply font-semibold rounded-full cursor-default text-white dark:text-black
+}
