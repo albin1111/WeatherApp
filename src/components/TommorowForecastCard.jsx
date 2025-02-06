@@ -5,12 +5,10 @@ const WeatherCard = ({ weatherdata, currentTime, currentDay }) => {
   return (
     <>
       {/* for 7 days */}
-      < div className='flex flex-col w-full wcard-active snap-start' >
-        <div className='flex justify-around p-5 text-xl font-semibold rounded-t-3xl bg-primary-400 bg-opacity-20'>
+      < div className='flex flex-col justify-center w-full h-full px-5 py-0 rounded-3xl bg-cus-gray-900 dark:bg-cus-gray-50' >
+        <div className='flex items-center justify-around p-5 text-xl font-semibold rounded-t-3xl bg-opacity-20'>
           {/* day */}
           <div className=''>{currentDay}</div>
-          {/* time */}
-          <div className=''>{currentTime}</div>
         </div>
 
         <div className='flex h-full gap-3 p-5 pt-0 lg:gap-7'>

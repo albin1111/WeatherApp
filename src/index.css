@@ -67,7 +67,7 @@
 }
 
 .wcard-active {
-  @apply h-full grow bg-primary justify-center rounded-3xl text-cus-gray-950 custom-hover-shadowOnly
+  @apply h-full bg-primary justify-center rounded-3xl text-cus-gray-950 custom-hover-shadowOnly
   /* @apply h-full grow bg-primary justify-center rounded-3xl text-cus-gray-950 custom-hover-shadowOnly max-w-[500px] */
 }
 
@@ -152,7 +152,7 @@
 }
 
 .btn-activeTab {
-  @apply text-cus-gray-950 dark:text-cus-gray-950 cursor-default font-medium z-10
+  @apply text-cus-gray-950 dark:text-cus-gray-950 cursor-default z-10
   /* @apply bg-primary dark:bg-primary text-cus-gray-950 cursor-default */
 }
 
@@ -166,5 +166,5 @@
 }
 
 .day-active {
-  @apply font-semibold rounded-full cursor-default text-white dark:text-black
+  @apply font-semibold rounded-full cursor-default text-white dark:text-black transition-all ease-in-out
 }

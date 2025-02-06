@@ -6,6 +6,7 @@ import { icons, weatherIcons } from './utils/icons';
 import OtherCitiesCard from './components/OtherCitiesCard';
 import { fetchForecastData, fetchWeatherData } from './utils/weatherUtil';
 import DailyForecastCard from './components/DailyForecastCard';
+import TommorowForecastCard from './components/TommorowForecastCard';
 
 function App() {
 
@@ -18,9 +19,6 @@ function App() {
   const [activeDay, setActiveDay] = useState('today')
   const [currentTime, setCurrentTime] = useState('');
   const [currentDay, setCurrentDay] = useState('');
-
-  const SetActiveTab = (activeTabLabel) => { setActiveTab(activeTabLabel) }
-  const SetActiveDay = (activeDayLabel) => { setActiveDay(activeDayLabel) }
 
   function handleThemeToggle() {
     if (isLightMode) setIsLightMode(false)
@@ -55,7 +53,7 @@ function App() {
     series: [
       {
         name: "Celcius",
-        data: ['1', '2', '3', '2', '3', '2',],
+        data: ['29', '28', '29', '27', '26', '27',],
       },
     ],
     options: {
@@ -222,9 +220,9 @@ function App() {
             {/* w-40% */}
             <div className='w-fit xl:w-[40%] flex responsive-gap items-center px-1'>
               <h1 className='items-center hidden gap-2 cursor-default xl:flex'>
-                <img className='flex size-4 dark:hidden' src={icons.logo_white} alt="" />
-                <img className='hidden dark:flex size-4' src={icons.logo} alt="" />
-                NiggaWeather
+                <img className='flex size-4 dark:hidden' src={icons.logo2_white} alt="" />
+                <img className='hidden dark:flex size-4' src={icons.logo2} alt="" />
+                Weather App
               </h1>
               {/* toggle */}
               <button className='relative flex items-center h-full p-3 ml-auto overflow-hidden rounded-full bg-cus-gray-900 dark:bg-cus-gray-50 custom-hover min-w-fit gap-7 justify-evenly focused2' onClick={handleThemeToggle}>
@@ -265,45 +263,84 @@ function App() {
             <div className='flex flex-col w-full responsive-gap-sections h-fit lg:flex-row'>
               {/* weather */}
               {/* for today remove: lg:w-[70%] */}
-              <div className='flex flex-col w-full lg:w-[70%] h-full p-1 pt-0 responsive-gap'>
+              <div className='flex flex-col lg:max-w-[70%] w-full h-full p-1 pt-0 responsive-gap'>
 
                 {/* header buttons */}
                 <div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
+
+                  {openSearch && (
+                    <div className='flex items-center lg:hidden'>
+                      <svg className='icon-size icon-inactive' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7" /></svg>
+                      <h3 className='text-nowrap truncate max-w-[25vw]'>
+                        <span className='font-medium'>{weatherdata.location}, </span>
+                        <span className='responsive-subtext-color'>{weatherdata.country}</span>
+                      </h3>
+                    </div>
+                  )}
+
                   <div className='flex items-center w-full text-xl md:gap-10 justify-evenly md:justify-start'>
-                    <button className={`${activeDay == 'today' ? 'day-active' : 'day-inactive'}`} onClick={() => { SetActiveDay('today') }}>Today</button>
-                    <button className={`${activeDay == 'tom' ? 'day-active' : 'day-inactive'}`} onClick={() => { SetActiveDay('tom') }}>Tomorrow</button>
-                    <button className={`${activeDay == 'next7' ? 'day-active' : 'day-inactive'}`} onClick={() => { SetActiveDay('next7') }}>Next 7 Days</button>
+                    <button className={`${activeDay == 'today' ? 'day-active' : 'day-inactive'}`} onClick={() => { setActiveDay('today') }}>Today</button>
+                    <button className={`${activeDay == 'tom' ? 'day-active' : 'day-inactive'}`} onClick={() => { setActiveDay('tom') }}>Tomorrow</button>
+                    <button className={`${activeDay == 'next7' ? 'day-active' : 'day-inactive'}`} onClick={() => { setActiveDay('next7') }}>Next 7 Days</button>
                   </div>
 
                   <div className='relative flex w-full overflow-hidden rounded-full md:w-fit focused bg-cus-gray-900 dark:bg-cus-gray-50 custom-hover-shadowOnly-sm'>
                     {/* <input type="radio" name="" id="" /> */}
                     <div className={`absolute w-1/2 h-full rounded-full transition-all bg-primary ease-in-out top-0 left-0 inset-0 ${activeTab == 'forecast' ? 'translate-x-0' : 'translate-x-full'}`}></div>
 
-                    <button className={`btn-tab ${activeTab == 'forecast' ? 'btn-activeTab' : 'btn-inactiveTab'}`} onClick={() => { SetActiveTab('forecast') }}>Forecast</button>
-                    <button className={`btn-tab ${activeTab == 'air' ? 'btn-activeTab' : 'btn-inactiveTab'}`} onClick={() => { SetActiveTab('air') }}>Air Quality</button>
+                    <button
+                      className={`btn-tab ${activeTab == 'forecast' ? 'btn-activeTab' : 'btn-inactiveTab'}`}
+                      onClick={() => { setActiveTab('forecast') }}
+                    >
+                      Forecast
+                    </button>
+                    <button
+                      className={`btn-tab ${activeTab == 'air' ? 'btn-activeTab' : 'btn-inactiveTab'}`}
+                      onClick={() => { setActiveTab('air') }}
+                    >
+                      Air Quality
+                    </button>
                   </div>
                 </div>
 
                 {/* wcards container*/}
-                <div className='flex w-full p-1 overflow-auto h-fit snap-x responsive-gap dark:text-cus-gray-800'>
+                <div className='flex w-full h-full p-1 overflow-auto snap-x responsive-gap dark:text-cus-gray-800'>
                   {/* active weather card*/}
                   <WeatherCard
                     weatherdata={weatherdata}
                     currentDay={currentDay}
                     currentTime={currentTime}
                   ></WeatherCard>
+                  {/* <div className='z-50 flex w-full h-full bg-white '>asd</div> */}
 
-                  {/* default weather card */}
-                  {/* for today add: hidden */}
-                  <div className='grid grid-flow-col responsive-gap snap-start'>
-                    <DailyForecastCard></DailyForecastCard>
-                    <DailyForecastCard></DailyForecastCard>
-                    <DailyForecastCard></DailyForecastCard>
-                    <DailyForecastCard></DailyForecastCard>
-                    <DailyForecastCard></DailyForecastCard>
-                    <DailyForecastCard></DailyForecastCard>
+                  < div className={`${activeDay == 'tom' ? 'flex' : 'hidden'} responsive-gap snap-start`}>
+                    <TommorowForecastCard
+                      weatherdata={weatherdata}
+                      currentDay={currentDay}
+                      currentTime={currentTime}
+                    ></TommorowForecastCard>
+                    {/* <DailyForecastCard></DailyForecastCard> */}
+                    {/* <div className='z-50 h-full bg-blue-500'>asdd</div> */}
                   </div>
+
+                  < div className={`${activeDay == 'next7' ? 'grid' : 'hidden'} grid-flow-col responsive-gap snap-start w-full`}>
+                    <DailyForecastCard ></DailyForecastCard>
+                    <DailyForecastCard ></DailyForecastCard>
+                    <DailyForecastCard ></DailyForecastCard>
+                    <DailyForecastCard ></DailyForecastCard>
+                    <DailyForecastCard ></DailyForecastCard>
+                    <DailyForecastCard ></DailyForecastCard>
+                    {/* <div className='z-50 flex w-full h-full bg-red-300'>asddd</div>
+                    <div className='z-50 flex w-full h-full bg-red-300'>asddd</div>
+                    <div className='z-50 flex w-full h-full bg-red-300'>asddd</div>
+                    <div className='z-50 flex w-full h-full bg-red-300'>asddd</div>
+                    <div className='z-50 flex w-full h-full bg-red-300'>asddd</div>
+                    <div className='z-50 flex w-full h-full bg-red-300'>asddd</div>
+                    <div className='z-50 flex w-full h-full bg-red-300'>asddd</div> */}
+                  </div>
+
                 </div>
+
               </div>
 
               {/* chart */}
@@ -327,7 +364,7 @@ function App() {
                 </div>
 
                 {/* map */}
-                <div className='flex w-full h-[60vh] resize lg:h-full overflow-hidden transition-all ease-in rounded-3xl min-h-[400px] lg:min-h-[300px] responsive-bg custom-hover-shadowOnly responsive-text-color snap-start'>
+                <div className='flex w-full h-[60vh] resize lg:h-full overflow-hidden transition-all ease-in rounded-3xl min-h-[400px] lg:min-h-[300px] responsive-bg custom-hover-shadowOnly responsive-text-color snap-start hover:brightness-110'>
                   <div className='relative flex w-full'>
                     <div className='absolute inset-0 responsive-p'>
                       <div className='relative w-full h-full'>
@@ -357,7 +394,7 @@ function App() {
                         </div>
                       </div>
                     </div>
-                    <img className='object-cover w-full text-red-500' src={icons.map} alt="" />
+                    <img className='object-cover w-full text-red-500 transition-all ease-in-out' src={icons.map} alt="" />
                   </div>
                 </div>
               </div>
@@ -365,7 +402,7 @@ function App() {
               {/* other cities */}
               <div className='w-full lg:w-[40%] flex flex-col responsive-gap'>
                 <div className='flex items-center justify-between gap-3 p-1 pt-0'>
-                  <h1 className='text-xl font-semibold'>Other large cities</h1>
+                  <h1 className='text-xl font-semibold'>Other cities</h1>
 
                   <button className='flex items-center gap-3 pl-5 pr-3 text-sm lg:px-0 xl:pl-5 xl:pr-3 btn-showAll focused2 custom-hover custom-hover-text-color custom-hover-shadowOnly'>
                     <p className='flex lg:hidden xl:flex'>Show All</p>
@@ -380,9 +417,9 @@ function App() {
                   <OtherCitiesCard city="Shibuya"></OtherCitiesCard>
                   <OtherCitiesCard city="London"></OtherCitiesCard>
                   <OtherCitiesCard city="New York"></OtherCitiesCard>
-                  <OtherCitiesCard city="New York"></OtherCitiesCard>
-                  <OtherCitiesCard city="New York"></OtherCitiesCard>
-                  <OtherCitiesCard city="New York"></OtherCitiesCard>
+                  <OtherCitiesCard city="Shanghai"></OtherCitiesCard>
+                  <OtherCitiesCard city="Batangas"></OtherCitiesCard>
+                  <OtherCitiesCard city="Tokyo"></OtherCitiesCard>
                 </div>
 
               </div>

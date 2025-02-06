@@ -8,7 +8,9 @@ import thunderstorm from "../assets/thunderstorm.svg"
 import snow from "../assets/snow.svg"
 import mist from "../assets/mist.svg"
 import logo from "../assets/logo.svg"
+import logo2 from "../assets/logo2.svg"
 import logo_white from "../assets/logo_white.svg"
+import logo2_white from "../assets/logo2_white.svg"
 import map from "../assets/map.svg"
 
 export const weatherIcons = {
@@ -26,5 +28,7 @@ export const weatherIcons = {
 export const icons = {
   logo,
   logo_white,
+  logo2,
+  logo2_white,
   map,
 }
