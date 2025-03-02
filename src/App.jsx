@@ -143,6 +143,7 @@ function App() {
         <p className='2xl:hidden'>xl</p>
         <p className=''>2xl</p>
       </div>
+
       <div className='relative w-full h-screen overflow-auto transition-colors ease-in-out scroll-smooth bg-cus-gray-950 text-cus-gray-50 dark:bg-cus-gray-100 dark:text-cus-gray-800'>
         <div className='container flex flex-col mx-auto lg:h-full lg:overflow-auto scroll-smooth'>
 
